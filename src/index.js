@@ -34,7 +34,7 @@ class TicketsList extends React.Component {
         console.log(ticketsData);
         return(
             <div>
-                {ticketsData.tickets.map(ticket => this.renderTicket(ticket))}
+                {ticketsData.tickets.sort((a, b) => a.price > b.price).map(ticket => this.renderTicket(ticket))}
             </div>
         );
     }
