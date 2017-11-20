@@ -26,21 +26,32 @@ class TicketCell extends React.Component {
 }
 
 class TicketsList extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {stops: props.stops};
+    }
+
     renderTicket(ticket) {
         return <TicketCell ticket={ticket}/>
     }
 
     render() {
-        console.log(ticketsData);
+        var self = this;
+
         return(
             <div>
-                {ticketsData.tickets.sort((a, b) => a.price > b.price).map(ticket => this.renderTicket(ticket))}
+                {ticketsData.tickets.filter( function(value) {
+                    if (self.state.stops == null) {
+                        return true;
+                    }
+
+                    return value.stops < self.state.stops;
+                }).sort((a, b) => a.price > b.price).map(ticket => this.renderTicket(ticket))}
             </div>
         );
     }
 }
 
-ReactDOM.render(
-    <TicketsList />,
-    document.getElementById('root')
-);
+var stops = 1;
+ReactDOM.render(<TicketsList stops={stops}/>, document.getElementById('root'));
