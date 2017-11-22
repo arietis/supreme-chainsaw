@@ -29,7 +29,64 @@ class TicketsList extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {stops: props.stops};
+        var stops = new Set();
+        stops.add(0);
+        stops.add(1);
+        stops.add(2);
+        stops.add(3);
+        this.state = {stops: stops};
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+
+    handleInputChange(event) {
+        var target = event.target
+
+        var checked = target.checked;
+
+        var value = target.value
+
+        var stops = this.state.stops;
+        switch (value) {
+            case '0':
+                if (checked) {
+                    stops.add(0);
+                } else {
+                    stops.delete(0);
+                }
+                break;
+            case '1':
+                if (checked) {
+                    stops.add(1);
+                } else {
+                    stops.delete(1);
+                }
+                break;
+            case '2':
+                if (checked) {
+                    stops.add(2);
+                } else {
+                    stops.delete(2);
+                }
+                break;
+            case '3':
+                if (checked) {
+                    stops.add(3);
+                } else {
+                    stops.delete(3);
+                }
+                break;
+            default:
+                if (checked) {
+                    stops.add(0);
+                    stops.add(1);
+                    stops.add(2);
+                    stops.add(3);
+                } else {
+                    stops.clear();
+                }
+                break;
+        }
+        this.setState({stops: stops});
     }
 
     renderTicket(ticket) {
@@ -41,17 +98,30 @@ class TicketsList extends React.Component {
 
         return(
             <div>
-                {ticketsData.tickets.filter( function(value) {
-                    if (self.state.stops == null) {
-                        return true;
-                    }
-
-                    return value.stops < self.state.stops;
-                }).sort((a, b) => a.price > b.price).map(ticket => this.renderTicket(ticket))}
+                <fieldset>
+                    <input checked={[0, 1, 2, 3].every(value => this.state.stops.has(value))} id='allStops' onChange={this.handleInputChange} type='checkbox' value=''/>
+                    <label for='allStops'>All</label>
+                    <br/>
+                    <input checked={this.state.stops.has(0)} id='zeroStops' onChange={this.handleInputChange} type='checkbox' value='0'/>
+                    <label for='zeroStops'>No stops</label>
+                    <br/>
+                    <input checked={this.state.stops.has(1)} id='oneStop' onChange={this.handleInputChange} type='checkbox' value='1'/>
+                    <label for='oneStop'>1 stop</label>
+                    <br/>
+                    <input checked={this.state.stops.has(2)} id='twoStops' onChange={this.handleInputChange} type='checkbox' value='2'/>
+                    <label for='twoStops'>2 stops</label>
+                    <br/>
+                    <input checked={this.state.stops.has(3)} id='threeStops' onChange={this.handleInputChange} type='checkbox' value='3'/>
+                    <label for='threeStops'>3 stops</label>
+                </fieldset>
+                <div>
+                    {ticketsData.tickets.filter( function(value) {
+                        return self.state.stops.has(value.stops);
+                    }).sort((a, b) => a.price > b.price).map(ticket => this.renderTicket(ticket))}
+                </div>
             </div>
         );
     }
 }
 
-var stops = 1;
-ReactDOM.render(<TicketsList stops={stops}/>, document.getElementById('root'));
+ReactDOM.render(<TicketsList />, document.getElementById('root'));
