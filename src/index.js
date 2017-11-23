@@ -124,4 +124,15 @@ class TicketsList extends React.Component {
     }
 }
 
-ReactDOM.render(<TicketsList />, document.getElementById('root'));
+class TicketsView extends React.Component {
+    render() {
+        return(
+            <div>
+                <div className='logo'></div>
+                <TicketsList />
+            </div>
+        );
+    }
+}
+
+ReactDOM.render(<TicketsView />, document.getElementById('root'));
