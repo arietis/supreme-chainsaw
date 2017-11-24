@@ -2,6 +2,45 @@ body {
     background-color: #f3f7fa;
 }
 
+.filter-cell {
+	background-color: #fff;
+	height: 36px;
+	width: 100%;
+}
+
+.filter-cell:hover {
+    background-color: #f1fcff;
+}
+
+.filter-cell-title {
+	height: 35px;
+	width: 91px;
+	color: #4a4a4a;
+	font-family: "Open Sans";
+	font-size: 13px;
+	line-height: 35px;
+}
+
+.filter-stop-quantity {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 1px 4px 0 rgba(91,137,164,0.25);
+    height: 231px;
+    margin-left: 103px;
+	width: 232px;
+}
+
+.filter-title {
+	color: #4a4a4a;
+	font-family: "Open Sans";
+	font-size: 12px;
+	height: 19px;
+    line-height: 19px;
+    margin-left: 15px;
+    padding-top: 15px;
+	width: 166px;
+}
+
 .logo {
     background: url('./assets/logo.png');
     height: 89px;
@@ -14,4 +53,8 @@ body {
 .ticket-cell {
     background: #fff;
     position: relative;
+}
+
+.tickets-list {
+    margin-top: 47px;
 }

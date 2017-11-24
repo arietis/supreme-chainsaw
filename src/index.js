@@ -41,42 +41,45 @@ class TicketsList extends React.Component {
     handleInputChange(event) {
         var target = event.target
 
-        var checked = target.checked;
-
-        var value = target.value
+        var value = target.id
 
         var stops = this.state.stops;
+
         switch (value) {
-            case '0':
-                if (checked) {
+            case 'zeroStops':
+                if (!stops.has(0)) {
                     stops.add(0);
                 } else {
                     stops.delete(0);
                 }
+
                 break;
-            case '1':
-                if (checked) {
+            case 'oneStop':
+                if (!stops.has(1)) {
                     stops.add(1);
                 } else {
                     stops.delete(1);
                 }
+
                 break;
-            case '2':
-                if (checked) {
+            case 'twoStops':
+                if (!stops.has(2)) {
                     stops.add(2);
                 } else {
                     stops.delete(2);
                 }
+
                 break;
-            case '3':
-                if (checked) {
+            case 'threeStops':
+                if (!stops.has(3)) {
                     stops.add(3);
                 } else {
                     stops.delete(3);
                 }
+
                 break;
             default:
-                if (checked) {
+                if (![0, 1, 2, 3].every(value => this.state.stops.has(value))) {
                     stops.add(0);
                     stops.add(1);
                     stops.add(2);
@@ -84,6 +87,7 @@ class TicketsList extends React.Component {
                 } else {
                     stops.clear();
                 }
+
                 break;
         }
         this.setState({stops: stops});
@@ -97,23 +101,30 @@ class TicketsList extends React.Component {
         var self = this;
 
         return(
-            <div>
-                <fieldset>
-                    <input checked={[0, 1, 2, 3].every(value => this.state.stops.has(value))} id='allStops' onChange={this.handleInputChange} type='checkbox' value=''/>
-                    <label for='allStops'>All</label>
-                    <br/>
-                    <input checked={this.state.stops.has(0)} id='zeroStops' onChange={this.handleInputChange} type='checkbox' value='0'/>
-                    <label for='zeroStops'>No stops</label>
-                    <br/>
-                    <input checked={this.state.stops.has(1)} id='oneStop' onChange={this.handleInputChange} type='checkbox' value='1'/>
-                    <label for='oneStop'>1 stop</label>
-                    <br/>
-                    <input checked={this.state.stops.has(2)} id='twoStops' onChange={this.handleInputChange} type='checkbox' value='2'/>
-                    <label for='twoStops'>2 stops</label>
-                    <br/>
-                    <input checked={this.state.stops.has(3)} id='threeStops' onChange={this.handleInputChange} type='checkbox' value='3'/>
-                    <label for='threeStops'>3 stops</label>
-                </fieldset>
+            <div class='tickets-list'>
+                <div className='filter-stop-quantity'>
+                    <h1 class='filter-title'>КОЛИЧЕСТВО ПЕРЕСАДОК</h1>
+                    <div className='filter-cell' id='allStops' onClick={this.handleInputChange} value=''>
+                        <input checked={[0, 1, 2, 3].every(value => this.state.stops.has(value))} type='checkbox'/>
+                        <label class='filter-cell-title'>Все</label>
+                    </div>
+                    <div className='filter-cell' id='zeroStops' onClick={this.handleInputChange} value='0'>
+                        <input checked={this.state.stops.has(0)} type='checkbox'/>
+                        <label class='filter-cell-title'>Без пересадок</label>
+                    </div>
+                    <div className='filter-cell' id='oneStop' onClick={this.handleInputChange} value='1'>
+                        <input checked={this.state.stops.has(1)} type='checkbox'/>
+                        <label class='filter-cell-title'>1 пересадка</label>
+                    </div>
+                    <div className='filter-cell' id='twoStops' onClick={this.handleInputChange} value='2'>
+                        <input checked={this.state.stops.has(2)} type='checkbox'/>
+                        <label class='filter-cell-title'>2 пересадки</label>
+                    </div>
+                    <div className='filter-cell' id='threeStops' onClick={this.handleInputChange} value='3'>
+                        <input checked={this.state.stops.has(3)} type='checkbox'/>
+                        <label class='filter-cell-title'>3 пересадки</label>
+                    </div>
+                </div>
                 <div>
                     {ticketsData.tickets.filter( function(value) {
                         return self.state.stops.has(value.stops);
