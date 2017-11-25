@@ -12,13 +12,35 @@ body {
     background-color: #f1fcff;
 }
 
+.filter-cell-checkbox {
+	background-color: #fff;
+	border: 1px solid #d2d5d6;
+	border-radius: 3px;
+    box-sizing: border-box;
+    display: inline-block;
+    height: 19px;
+    margin-left: 16px;
+    margin-top: 8px;
+    width: 19px;
+}
+
+.filter-cell-checkbox-checked {
+    background: url('./assets/checkmark.png');
+    display: inline-block;
+    height: 19px;
+    margin-left: 16px;
+    margin-top: 8px;
+    width: 19px;
+}
+
 .filter-cell-title {
-	height: 35px;
-	width: 91px;
-	color: #4a4a4a;
+    color: #4a4a4a;
 	font-family: "Open Sans";
-	font-size: 13px;
-	line-height: 35px;
+    font-size: 13px;
+    height: 35px;
+    line-height: 35px;
+    margin-left: 11px;
+    width: 91px;
 }
 
 .filter-stop-quantity {

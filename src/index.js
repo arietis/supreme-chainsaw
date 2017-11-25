@@ -105,23 +105,23 @@ class TicketsList extends React.Component {
                 <div className='filter-stop-quantity'>
                     <h1 class='filter-title'>КОЛИЧЕСТВО ПЕРЕСАДОК</h1>
                     <div className='filter-cell' id='allStops' onClick={this.handleInputChange} value=''>
-                        <input checked={[0, 1, 2, 3].every(value => this.state.stops.has(value))} type='checkbox'/>
+                        <div class={[0, 1, 2, 3].every(value => this.state.stops.has(value)) ? 'filter-cell-checkbox-checked' : 'filter-cell-checkbox'}></div>
                         <label class='filter-cell-title'>Все</label>
                     </div>
                     <div className='filter-cell' id='zeroStops' onClick={this.handleInputChange} value='0'>
-                        <input checked={this.state.stops.has(0)} type='checkbox'/>
+                        <div class={this.state.stops.has(0) ? 'filter-cell-checkbox-checked' : 'filter-cell-checkbox'}></div>
                         <label class='filter-cell-title'>Без пересадок</label>
                     </div>
                     <div className='filter-cell' id='oneStop' onClick={this.handleInputChange} value='1'>
-                        <input checked={this.state.stops.has(1)} type='checkbox'/>
+                        <div class={this.state.stops.has(1) ? 'filter-cell-checkbox-checked' : 'filter-cell-checkbox'}></div>
                         <label class='filter-cell-title'>1 пересадка</label>
                     </div>
                     <div className='filter-cell' id='twoStops' onClick={this.handleInputChange} value='2'>
-                        <input checked={this.state.stops.has(2)} type='checkbox'/>
+                        <div class={this.state.stops.has(2) ? 'filter-cell-checkbox-checked' : 'filter-cell-checkbox'}></div>
                         <label class='filter-cell-title'>2 пересадки</label>
                     </div>
                     <div className='filter-cell' id='threeStops' onClick={this.handleInputChange} value='3'>
-                        <input checked={this.state.stops.has(3)} type='checkbox'/>
+                        <div class={this.state.stops.has(3) ? 'filter-cell-checkbox-checked' : 'filter-cell-checkbox'}></div>
                         <label class='filter-cell-title'>3 пересадки</label>
                     </div>
                 </div>
