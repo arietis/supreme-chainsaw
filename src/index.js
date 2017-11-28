@@ -1,13 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import store from './store';
-import './index.css';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
+import { getAllTickets } from "./actions"
+import reducer from './reducers'
+import './index.css'
 
 global.React = React;
 global.ReactDOM = ReactDOM;
 
-const ticketsData = require('./tickets.json');
+const ticketsData = [];
 
 const TicketCell = function (props) {
   const ticket = props.ticket;
@@ -104,12 +107,12 @@ class TicketsList extends React.Component {
   render() {
     const self = this;
 
-    const filteredTickets = ticketsData.tickets.filter((value) => {
-      const {stops} = value;
-
-      return self.state.stops.has(stops);
-    });
-    const sortedTickets = filteredTickets.sort((a, b) => a.price > b.price);
+    // const filteredTickets = [].tickets.filter((value) => {
+    //   const {stops} = value;
+    //
+    //   return self.state.stops.has(stops);
+    // });
+    // const sortedTickets = filteredTickets.sort((a, b) => a.price > b.price);
 
     return (
       <div className="tickets-list">
@@ -139,9 +142,9 @@ class TicketsList extends React.Component {
         </div>
         <div>
           {
-            sortedTickets.map((ticket) => {
-              return this.renderTicket(ticket);
-            })
+            // sortedTickets.map((ticket) => {
+            //   return this.renderTicket(ticket);
+            // })
           }
         </div>
       </div>
@@ -158,6 +161,10 @@ const TicketsView = function TicketsView() {
   );
 };
 
+const middleware = [thunk];
+
+const store = createStore(reducer, applyMiddleware(...middleware));
+store.dispatch(getAllTickets());
 ReactDOM.render(
     <Provider store={store}>
         <TicketsView />
